@@ -28,7 +28,34 @@ export default function Home() {
     id: '34234123354576787896890',
     title: 'Eu odeio acordar cedo',
     image: 'https://alurakut.vercel.app/capa-comunidade-01.jpg'
-  }]);
+  }, 
+  {
+  id: '675674567567456756745',
+  title: 'Quem é você na fila do pão?',
+  image: 'https://s1.1zoom.me/big3/416/Earth_Black_background_548690_4000x4000.jpg'
+
+  },
+  { 
+    id: '56756756756546456745674567',
+    title: 'Belas paisagens',
+    image: 'http://2.bp.blogspot.com/-vCenRrY5x1w/UGcnfSAq5tI/AAAAAAAAFkM/xmLrKj7tLsY/s1600/Imagen+linda+por+do+sol+na+floresta.jpg'
+  },
+  { 
+    id: '2314123412342342341234',
+    title: 'Otaku não deveria existir',
+    image: 'https://pm1.narvii.com/6364/178c5ed2a8a51d5ddb191e8dd5e5eb0ae8297157_hq.jpg'
+  },
+  { 
+    id: '123156455467456765867',
+    title: 'Desenhos que fizeram parte da nossa infância',
+    image: 'https://rockfeller.com.br/assets/video-slide/images/image-slider-1.jpg'
+  },
+  { 
+    id: '2343345657456764876869809',
+    title: 'Assitindo a evolução',
+    image: 'https://www.uu.se/digitalAssets/805/c_805646-l_1-k_image.jpg'
+  },
+  ]);
   const pessoasFavoritas = [
     'Ewerson2',
     'renelcm',
@@ -37,6 +64,14 @@ export default function Home() {
     'Peas',
     'felipefialho'
   ]
+
+  const seguidores = fetch('https://api.github.com/users/GuilhermeMontez/followers')
+  .then(function (respostaDoServidor) {
+    return respostaDoServidor.json();
+  })
+  .then(function (respostaCompleta) {
+    console.log(respostaCompleta);
+  })
 
   return (
     <div>
@@ -70,7 +105,6 @@ export default function Home() {
               setComunidades(comunidadesAtualizadas);
             }}>
               <div>
-
                 <input
                   placeholder="Qual vai ser o nome da sua comunidade?"
                   name="title"
@@ -129,7 +163,6 @@ export default function Home() {
               })}
             </ul>
           </ProfileRelationsBoxWrapper>
-
         </div>
       </MainGrid>
     </div>
