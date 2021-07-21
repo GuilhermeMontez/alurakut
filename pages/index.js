@@ -1,6 +1,6 @@
 import React from 'react';
-import MainGrid from '../src/components/MainGrid'
-import Box from '../src/components/Box'
+import MainGrid from '../src/components/MainGrid';
+import Box from '../src/components/Box';
 import { AlurakutMenu, AlurakutProfileSidebarMenuDefault, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons'
 import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelations'
 
@@ -22,40 +22,36 @@ function ProfileSidebar(propriedades) {
   )
 }
 
+function ProfileRelationsBox (propriedades) {
+  return (
+    <ProfileRelationsBoxWrapper>
+            <h2 className="smallTitle">
+            {propriedades.title} ({propriedades.items.length})
+            </h2>
+            <ul>
+              {/*{seguidores.map((itemAtual) => {
+                return (
+                  <li key={itemAtual}>
+                    <a href={`https://github.com${itemAtual}.png`}>
+                      <img src={itemAtual.image} />
+                      <span>{itemAtual.title}</span>
+                    </a>
+                  </li>
+                )
+              })}*/}
+            </ul>
+          </ProfileRelationsBoxWrapper>
+  )
+}
+
 export default function Home() {
   const githubUser = 'GuilhermeMontez';
   const [comunidades, setComunidades] = React.useState([{
     id: '34234123354576787896890',
     title: 'Eu odeio acordar cedo',
     image: 'https://alurakut.vercel.app/capa-comunidade-01.jpg'
-  }, 
-  {
-  id: '675674567567456756745',
-  title: 'Quem é você na fila do pão?',
-  image: 'https://s1.1zoom.me/big3/416/Earth_Black_background_548690_4000x4000.jpg'
-
-  },
-  { 
-    id: '56756756756546456745674567',
-    title: 'Belas paisagens',
-    image: 'http://2.bp.blogspot.com/-vCenRrY5x1w/UGcnfSAq5tI/AAAAAAAAFkM/xmLrKj7tLsY/s1600/Imagen+linda+por+do+sol+na+floresta.jpg'
-  },
-  { 
-    id: '2314123412342342341234',
-    title: 'Otaku não deveria existir',
-    image: 'https://pm1.narvii.com/6364/178c5ed2a8a51d5ddb191e8dd5e5eb0ae8297157_hq.jpg'
-  },
-  { 
-    id: '123156455467456765867',
-    title: 'Desenhos que fizeram parte da nossa infância',
-    image: 'https://rockfeller.com.br/assets/video-slide/images/image-slider-1.jpg'
-  },
-  { 
-    id: '2343345657456764876869809',
-    title: 'Assitindo a evolução',
-    image: 'https://www.uu.se/digitalAssets/805/c_805646-l_1-k_image.jpg'
-  },
-  ]);
+  }]);
+  
   const pessoasFavoritas = [
     'Ewerson2',
     'renelcm',
@@ -64,14 +60,17 @@ export default function Home() {
     'Peas',
     'felipefialho'
   ]
+  const [seguidores, setSeguidores] = React.useState([]);
 
-  const seguidores = fetch('https://api.github.com/users/GuilhermeMontez/followers')
+React.useEffect(function() {
+  fetch('https://api.github.com/users/GuilhermeMontez/followers')
   .then(function (respostaDoServidor) {
     return respostaDoServidor.json();
   })
   .then(function (respostaCompleta) {
-    console.log(respostaCompleta);
+    setSeguidores(respostaCompleta);
   })
+}, [])
 
   return (
     <div>
@@ -128,6 +127,8 @@ export default function Home() {
         </div>
 
         <div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
+        <ProfileRelationsBox title="Seguidores" items={seguidores} />
+
           <ProfileRelationsBoxWrapper>
             <h2 className="smallTitle">
               Pessoas da Comunidade ({pessoasFavoritas.length})
